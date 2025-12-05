@@ -1,6 +1,8 @@
 import React from "react";
-import { TestimonialsData } from "../../mockData/data";
+import { TestimonialsData } from "../../mockData/data.js";
 import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Testimonials = () => {
   const setting = {
@@ -13,6 +15,7 @@ const Testimonials = () => {
     autoplaySpeed: 2000,
     cssEase: "linear",
     pauseOnHover: true,
+    slidesToShow: 3,
     pauseOnFocus: true,
     responsive: [
       {
@@ -44,8 +47,8 @@ const Testimonials = () => {
     <div className="py-14 mb-10">
       <div className="container">
         {/* header section */}
-        <div className="text-left mb-10 max-w-[500px] space-y-2 mr-auto">
-          <h1 className="text-4xl font-bold">
+        <div className="text-center mb-10 w-full space-y-2 mr-auto">
+          <h1 className="text-4xl font-bold ">
             What Are The Costumer Saying About Us
           </h1>
         </div>
