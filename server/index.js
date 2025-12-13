@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/authRoutes.js'
 import aiRoutes from './routes/aiRoutes.js'
 import chatbotRoutes from './routes/chatbotRoutes.js'
-
+import activityRoutes from './routes/activityRoutes.js'
 import multer from 'multer';
 const app = express();
 const port = process.env.PORT || 3000;
@@ -36,3 +36,5 @@ app.get('/',(req,res)=>{
 app.use('/api/auth', authRouter);
 app.use('/api', aiRoutes);
 app.use('/api', chatbotRoutes);
+app.use('/api', activityRoutes);
+

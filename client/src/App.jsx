@@ -6,7 +6,8 @@ import AdminDashboard from "./users/admin/pages/AdminDashboard";
 import DashboardUser from "./users/user/pages/DashboardUser.jsx"
 import UserSuggestion from './users/user/pages/UserSuggestion.jsx';
 import AiChatbot from './users/user/pages/AiChatbot.jsx';
-
+import UserActivities from './users/user/pages/UserActivities.jsx';
+import CheckActivities from './users/user/pages/CheckActivities.jsx';
 //////
 import Register from './auth/Register/Register';
 import Login from './auth/Login/Login';
@@ -36,6 +37,10 @@ const App = () => {
         <Route path="/userdashboard" element={<DashboardUser />} />
         <Route path="/usersuggestion" element={<UserSuggestion />} />
         <Route path="/chatbot" element={<AiChatbot />} />
+        <Route path="/addactivities" element={<UserActivities />} />
+        <Route path="/viewactivities" element={<CheckActivities/>} />
+
+
 
 
      
