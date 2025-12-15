@@ -20,7 +20,7 @@ const AiChatbot = () => {
     scrollToBottom();
   }, [chatHistory]);
 
-  // Fetch chat history when component mounts
+
   useEffect(() => {
     const fetchChatHistory = async () => {
       try {
@@ -29,12 +29,7 @@ const AiChatbot = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch chat history');
         }
-        
         const data = await response.json();
-        console.log('Fetched chat data:', data); // Debug
-        
-        // Convert API format to chat messages
-        // Each item has userMessage and botResponse, so we need to split them
         if (Array.isArray(data)) {
           const formattedChats = [];
           data.forEach(chat => {
@@ -106,9 +101,6 @@ const AiChatbot = () => {
         }
 
         const data = await response.json();
-        console.log('AI Response:', data); // Debug
-
-        // Add AI response to chat
         const aiMessage = {
           sender: 'ai',
           message: data.botResponse || data.response || data.message || 'No response',

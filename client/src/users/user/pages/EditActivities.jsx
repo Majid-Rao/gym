@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../layouts/Header";
 import Sidebar from "../layouts/Sidebar";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate, useParams } from 'react-router-dom';
 
-const UserActivities = () => {
-  const { UserData } = useAuth();  // Fetch user data from the AuthContext
+const EditActivities = () => {
+  const { UserData } = useAuth(); 
+  const { id } = useParams();  
+  const navigate = useNavigate(); 
+
   const [formData, setFormData] = useState({
-    user: UserData._id, // Automatically set user ID from UserData
+    user: UserData._id,  
     diet_plan: '',
     meal_routine: [],
     workout_routine: [],
@@ -14,6 +18,27 @@ const UserActivities = () => {
     goal: '',
     goal_achievement_percent: ''
   });
+
+  useEffect(() => {
+    const fetchActivity = async () => {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/getone-act/${id}`); // Pass only `id` here
+      const data = await response.json();
+      if (response.ok) {
+        setFormData({
+          user: data.user._id,
+          diet_plan: data.diet_plan,
+          meal_routine: data.meal_routine,
+          workout_routine: data.workout_routine,
+          calories_intake: data.calories_intake,
+          goal: data.goal,
+          goal_achievement_percent: data.goal_achievement_percent
+        });
+      } else {
+        alert("Error fetching activity data: " + data.message);
+      }
+    };
+    fetchActivity();
+  }, [id]); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,8 +67,8 @@ const UserActivities = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/insert-act`, {
-        method: 'POST',
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/update-act/${id}`, { 
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -51,17 +76,8 @@ const UserActivities = () => {
       });
       const result = await response.json();
       if (response.ok) {
-        alert('Data submitted successfully');
-        // Reset form data after successful submission
-        setFormData({
-          user: UserData._id,
-          diet_plan: '',
-          meal_routine: [],
-          workout_routine: [],
-          calories_intake: '',
-          goal: '',
-          goal_achievement_percent: ''
-        });
+        alert('Activity updated successfully');
+        navigate(`/viewactivities/${id}`); 
       } else {
         alert('Error: ' + result.message);
       }
@@ -72,25 +88,15 @@ const UserActivities = () => {
 
   return (
     <div className='flex h-screen bg-gray-900 text-gray-100 overflow-hidden'>
-      {/* Background */}
       <div className='fixed inset-0 z-0'>
         <div className='absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-80' />
         <div className='absolute inset-0 backdrop-blur-sm' />
       </div>
       <Sidebar />
       <div className='flex-1 overflow-auto relative z-10 p-8'>
-        <Header title='Submit Your Activities' />   
-        {/* Form Section */}
+        <Header title='Edit Your Activity' />
+
         <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-3xl mx-auto mt-10 space-y-6">
-          
-          {/* Hidden User ID Field */}
-          <input
-            type="text"
-            name="user"
-            value={formData.user}
-            className="hidden"
-            disabled
-          />
 
           <div className="flex flex-col">
             <label className="text-lg font-semibold">Diet Plan</label>
@@ -173,13 +179,12 @@ const UserActivities = () => {
             type="submit"
             className="w-full p-3 bg-blue-600 text-white rounded-md mt-6 hover:bg-blue-500"
           >
-            Submit Activity
+            Update Activity
           </button>
         </form>
-   
       </div>
     </div>
   );
 };
 
-export default UserActivities;
+export default EditActivities;

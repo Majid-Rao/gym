@@ -1,5 +1,5 @@
 import UserActivities from '../models/userActivityModel.js'; // Model import
-
+import mongoose from 'mongoose';
 // POST: Create a new user activity
 export const createUserActivity = async (req, res) => {
   try {
@@ -33,17 +33,46 @@ export const getUserActivities = async (req, res) => {
 };
 
 // GET: Get user activity by ID
+
+
 export const getUserActivityById = async (req, res) => {
+  const { id } = req.params;
+
+  // Check if the ID is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid ID format' });
+  }
+
   try {
-    const activity = await UserActivities.findById(req.params.id).populate('user', 'name email');
-    if (!activity) {
-      return res.status(404).json({ message: 'User activity not found' });
+    // Pehle check karo ke ye ID kisi specific activity document ki hai
+    const singleActivity = await UserActivities.findById(id).populate('user', 'name email');
+    
+    if (singleActivity) {
+      // Agar mil gayi to wahi return kar do
+      return res.status(200).json(singleActivity);
     }
-    res.status(200).json(activity);
+
+    // Agar nahi mili, to check karo ke ye user ID hai
+    const activitiesByUser = await UserActivities.find({ user: id }).populate('user', 'name email');
+    
+    if (activitiesByUser.length > 0) {
+      // Agar user ki activities mil gayin to return kar do
+      return res.status(200).json(activitiesByUser);
+    }
+
+    // Agar dono jagah se nahi mili to 404 return karo
+    return res.status(404).json({ message: 'User activity not found' });
+
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching user activity', error });
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching user activity', error: error.message });
   }
 };
+
+
+
+
+
 
 // PUT: Update user activity
 export const updateUserActivity = async (req, res) => {
