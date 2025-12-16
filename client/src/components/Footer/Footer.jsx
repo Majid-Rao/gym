@@ -12,8 +12,8 @@ const Footer = () => {
           <div className="py-8 px-4 space-y-4">
             <div className="text-2xl flex items-center gap-2 font-bold uppercase">
               <FaDumbbell />
-              <p>Coders</p>
-              <p className="text-secondary">Gym</p>
+              <p>Smart</p>
+              <p className="text-secondary">Gym X</p>
             </div>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus natus earum deserunt dolore voluptatem similique iure minus corporis quam quis pariatur maxime nemo expedita hic, porro vel reiciendis ipsum vero.
@@ -44,13 +44,13 @@ const Footer = () => {
                   <a href="#">Home</a>
                 </li>
                 <li>
-                  <a href="#">About</a>
+                  <a href="/about">About</a>
                 </li>
                 <li>
-                  <a href="#">Services</a>
+                  <a href="/services">Services</a>
                 </li>
                 <li>
-                  <a href="#">Login</a>
+                  <a href="/signIn">Login</a>
                 </li>
               </ul>
             </div>
@@ -60,10 +60,10 @@ const Footer = () => {
                 Company Links</h1>
               <ul className="flex flex-col gap-3">
                 <li>
-                  <a href="#">Our Services</a>
+                  <a href="/services">Our Services</a>
                 </li>
                 <li>
-                  <a href="#">Contact</a>
+                  <a href="/contact">Contact</a>
                 </li>
                 <li>
                   <a href="#">Privacy Policy</a>
@@ -79,13 +79,13 @@ const Footer = () => {
                   <a href="#">Home</a>
                 </li>
                 <li>
-                  <a href="#">About</a>
+                  <a href="/about">About</a>
                 </li>
                 <li>
-                  <a href="#">Services</a>
+                  <a href="/services">Services</a>
                 </li>
                 <li>
-                  <a href="#">Login</a>
+                  <a href="/signIn">Login</a>
                 </li>
               </ul>
             </div>
@@ -96,7 +96,7 @@ const Footer = () => {
         {/* copyright section  */}
         <div className="mt-8">
           <div className="text-center py-6 border-t-2 border-gray-300/10">
-            <span className="text-sm text-gray-300 opacity-70">@copyright 2025 The Coding Journey</span>
+            <span className="text-sm text-gray-300 opacity-70">@copyright 2025 Smart GYM X</span>
           </div>
         </div>
 

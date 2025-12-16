@@ -21,8 +21,8 @@ const Navbar = () => {
           {/* Logo section */}
           <div className="text-2xl flex items-center gap-2 font-bold uppercase">
             <FaDumbbell />
-            <p>Coders</p>
-            <p className="text-secondary">Gym</p>
+            <p>Smart</p>
+            <p className="text-secondary">Gym X</p>
           </div>
           {/* Menu section */}
           <div className="hidden md:block">
