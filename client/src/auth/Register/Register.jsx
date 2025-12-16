@@ -3,6 +3,8 @@ import { Select, Card, Flex, Form, Input, Button, Typography, Alert, Spin } from
 import './Register.css';
 import { Link } from 'react-router-dom';
 import registerImage from '../../assets/3.png';
+import signup from '../../assets/signup.webp';
+
 import usesignup from '../../hooks/usesignup';
 
 const Register = () => {
@@ -127,7 +129,7 @@ const Register = () => {
 
         {/* image */}
         <Flex flex={1}>
-          <img src={registerImage} className="auth-image" />
+          <img src={signup} className="auth-image" />
         </Flex>
       </Flex>
     </Card>

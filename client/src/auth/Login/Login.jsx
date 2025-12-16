@@ -1,9 +1,10 @@
-import React,{useEffect} from 'react'
+ import React,{useEffect} from 'react'
 import './Login.css'
 import {Spin, Card, Flex, Form,Input,Button, Typography, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import loginImage from '../../assets/3.png'
 import useLogin from '../../hooks/useLogin.jsx';
+import login from '../../assets/login.jpg'
 
 
 function Login() {
@@ -27,7 +28,7 @@ function Login() {
          {/* image */}
        
       <Flex flex={1}>
-        <img src={loginImage} className="auth-image"/>
+        <img src={login} className="auth-image"/>
       </Flex>
       {/* form */}
       <Flex vertical flex={1}>
