@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 // Schema definition
 const detailSchema = new mongoose.Schema({
+  userId :{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'User'
+  },
   height: {
     type: Number,
     required: true
@@ -9,6 +13,10 @@ const detailSchema = new mongoose.Schema({
   weight: {
     type: Number,
     required: true
+  },
+  age: {
+    type : Number,
+    required : true,
   },
   gender: {
     type: String,
@@ -27,6 +35,11 @@ const detailSchema = new mongoose.Schema({
     type: String,
     enum: ['lose', 'gain'],
     required: true
+  },
+  timeperiod: {
+    type:String,
+    enum:['1week','1month','3month','6month'],
+    required : true,
   },
   calories_needed: {
     type: Number,  // Calories required as per the diet plan

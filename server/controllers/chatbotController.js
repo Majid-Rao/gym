@@ -1,8 +1,7 @@
-import ChatLog from '../models/chatbotModel.js';  // Importing the ChatLog model
-import { OpenAI } from 'openai';  // Importing OpenAI to generate bot responses
+import ChatLog from '../models/chatbotModel.js';
+import { OpenAI } from 'openai';
 import 'dotenv/config.js';
 
-// OpenAI client instance (for GPT-3 or GPT-4 model)
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -11,12 +10,27 @@ const openai = new OpenAI({
 const generateAIResponse = async (userMessage) => {
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',  // You can switch to gpt-4 or any other model
-      messages: [{
-        role: 'user',
-        content: userMessage
-      }],
-      max_tokens: 150  // Limit the response length
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: `You are a helpful fitness and gym assistant. You ONLY answer questions related to:
+- Gym workouts and exercises
+- Fitness routines and training plans
+- Diet plans and nutrition
+- Weight loss and muscle gain
+- Health and wellness related to fitness
+
+If someone asks about anything else (movies, politics, general knowledge, etc.), politely tell them: "Sorry, I can only help with gym, fitness, and diet-related questions. Please ask me something about workouts, nutrition, or health!"
+
+Always be friendly and motivating!`
+        },
+        {
+          role: 'user',
+          content: userMessage
+        }
+      ],
+      max_tokens: 150
     });
 
     return response.choices[0].message.content.trim();
@@ -35,7 +49,7 @@ const storeChatHistory = async (userId, userMessage, botResponse) => {
       botResponse
     });
 
-    await chatLog.save();  // Saving the chat log in the database
+    await chatLog.save();
   } catch (error) {
     console.error("Error saving chat history:", error);
   }
@@ -63,8 +77,7 @@ const getChatHistory = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    // Fetch chat history for a specific user
-    const chatHistory = await ChatLog.find({ userId }).sort({ createdAt: -1 });  // Sort by most recent chat first
+    const chatHistory = await ChatLog.find({ userId }).sort({ createdAt: -1 });
     res.json(chatHistory);
   } catch (error) {
     console.error("Error fetching chat history:", error);
@@ -77,7 +90,6 @@ const deleteChat = async (req, res) => {
   const { chatId } = req.params;
 
   try {
-    // Delete the chat by ID
     await ChatLog.findByIdAndDelete(chatId);
     res.json({ message: 'Chat deleted successfully' });
   } catch (error) {

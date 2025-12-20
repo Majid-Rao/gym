@@ -16,13 +16,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const SIDEBAR_ITEMS = [
-  { name: "Dashboard", icon: BarChart2, color: "#6366f1", href: "/admindashbord" },
+  { name: "Dashboard", icon: BarChart2, color: "#6366f1", href: "/admindashboard" },
   // { name: "Add Packages", icon: Users, color: "#8B5CF6", href: "/addpackages" },
   // { name: "View Packages", icon: NotebookPen, color: "#EC4899", href: "/viewpackages" },
   { name: "User Management", icon: ArrowLeftRight, color: "#10B981", href: "#" },
-  { name: "View Blogs", icon: BookOpenCheck, color: "#F59E0B", href: "#" },
-  { name: "Add Variation", icon: ArrowLeftRight, color: "#10B981", href: "#" },
-  { name: "View Variations", icon: BookOpenCheck, color: "#F59E0B", href: "#" },
+  // { name: "View Blogs", icon: BookOpenCheck, color: "#F59E0B", href: "#" },
+  // { name: "Add Variation", icon: ArrowLeftRight, color: "#10B981", href: "#" },
+  // { name: "View Variations", icon: BookOpenCheck, color: "#F59E0B", href: "#" },
   // { name: "Complain's", icon: TrendingUp, color: "#3B82F6", href: "/" },
   // { name: "Feedbacks", icon: MessageSquare, color: "#6EE7B7", href: "/" },
 ];

@@ -23,7 +23,7 @@ const SIDEBAR_ITEMS = [
   { name: "AI ChatBot", icon: MessageSquare, color: "#F59E0B", href: "/chatbot" },
   { name: "Add Activities", icon: TrendingUp, color: "#10B981", href: "/addactivities" },
   { name: "View Activities", icon: BookOpenCheck, color: "#F59E0B", href: "/viewactivities/:id" },
-  { name: "Feature 3", icon: ArrowLeftRight, color: "#10B981", href: "/addtestimonial" },
+  { name: "View Suggestions", icon: ArrowLeftRight, color: "#10B981", href: "/viewsuggestions/:id" },
   { name: "Feature 4", icon: BookOpenCheck, color: "#F59E0B", href: "/viewtestimonials" },
   // { name: "Add Programs", icon: ArrowLeftRight, color: "#10B981", href: "/addprograms" },
   // { name: "View Programs", icon: BookOpenCheck, color: "#F59E0B", href: "/viewprograms" },

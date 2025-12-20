@@ -22,27 +22,8 @@ const AdminDashboard = () => {
 			<Header title='Admin Dasboard' />
 			
 			<main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
-				{/* STATS */}
-				
-				<motion.div
-					className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8'
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 1 }}
-				>
-					<StatCard name='Total Order' icon={Zap} value='10' color='#6366F1' />
-					<StatCard name='Orders' icon={Users} value='1' color='#8B5CF6' />
-					<StatCard name='Payment' icon={ShoppingBag} value='5' color='#EC4899' />
-					<StatCard name='Users' icon={BarChart2} value='4' color='#10B981' />
-				</motion.div>
-
-				{/* CHARTS */}
-
-				{/* <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-					<SalesOverviewChart />
-					<CategoryDistributionChart />
-					<SalesChannelChart />
-				</div> */}
+       <h1 className="text-center text-xl sm:text-3xl py-3">Welcome to Admin's Dashboard</h1>
+			
 			</main>
 		</div>
 		</div>

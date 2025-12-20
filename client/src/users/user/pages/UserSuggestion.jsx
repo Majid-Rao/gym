@@ -3,47 +3,71 @@ import Header from "../layouts/Header";
 import Sidebar from "../layouts/Sidebar";
 import { jsPDF } from "jspdf";  // For PDF generation
 import { RingLoader } from 'react-spinners';  // For better loading animation
+import { useAuth } from "../../../contexts/AuthContext";
 
 const UserSuggestion = () => {
+  const { UserData } = useAuth();
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+  const [age, setAge] = useState('');
+
   const [mealRoutine, setMealRoutine] = useState('');
   const [workoutRoutine, setWorkoutRoutine] = useState('');
-  const [goal, setGoal] = useState('');
-  const [gender, setGender] = useState('male');  // Added gender state
+  const [goal, setGoal] = useState('gain');
+  const [gender, setGender] = useState('male');
+  const [timeperiod, setTimeperiod] = useState('1week');  
   const [dietPlan, setDietPlan] = useState(''); // State for diet plan
   const [workoutPlan, setWorkoutPlan] = useState(''); // State for workout plan
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);  // State for loading animation
 
   // Form submission handler
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);  // Start loading animation
+  // Form submission handler
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    // Send data to the API
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/sharing_detail`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ height, weight, meal_routine: mealRoutine, workout_routine: workoutRoutine, goal, gender })
-    });
+  // Send data to the API - userId bhi add karo
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/sharing_detail`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ 
+      userId: UserData._id,  // ✅ Ye add karo
+      height, 
+      weight,
+      age, 
+      meal_routine: mealRoutine, 
+      workout_routine: workoutRoutine, 
+      goal, 
+      gender,
+      timeperiod 
+    })
+  });
 
-    const data = await response.json();
+  const data = await response.json();
 
-    // Set diet_plan and workout_plan from the API response
-    if (data.diet_plan && data.workout_plan) {
-      setDietPlan(data.diet_plan); // Set diet plan from API response
-      setWorkoutPlan(data.workout_plan); // Set workout plan from API response
-    } else {
-      setDietPlan('No diet plan available');
-      setWorkoutPlan('No workout plan available');
-    }
-
-    setLoading(false);  // Stop loading animation
-    setShowModal(true);  // Show modal with AI response
-  };
+  // Set diet_plan and workout_plan from the API response
+  if (data.diet_plan && data.workout_plan) {
+    setDietPlan(data.diet_plan);
+    setWorkoutPlan(data.workout_plan);
+  } else {
+    setDietPlan('No diet plan available');
+    setWorkoutPlan('No workout plan available');
+  }
+  setHeight('');
+  setWeight('');
+  setAge('');
+  setMealRoutine('');
+  setWorkoutRoutine('');
+  setGoal('gain');  // Default value pe set karo
+  setGender('male');  // Default value pe set karo
+  setTimeperiod('1week');  // Default value pe set karo
+  
+  setLoading(false);
+  setShowModal(true);
+};
 
   // PDF download function
  // PDF download function - Replace your handleDownload function with this
@@ -123,8 +147,6 @@ const handleDownload = () => {
       { align: 'center' }
     );
   }
-
-  // Save the document
   doc.save("Fitness_Plan.pdf");
 };
   return (
@@ -159,6 +181,16 @@ const handleDownload = () => {
                     id="weight"
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
+                    className="mt-1 block w-full p-2 bg-gray-700 text-white rounded-md"
+                  />
+                </div>
+                 <div className="mb-4">
+                  <label htmlFor="age" className="block text-sm font-medium">Age</label>
+                  <input
+                    type="number"
+                    id="age"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
                     className="mt-1 block w-full p-2 bg-gray-700 text-white rounded-md"
                   />
                 </div>
@@ -206,6 +238,21 @@ const handleDownload = () => {
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
+                  </select>
+                </div>
+                 {/* time dropdown */}
+                <div className="mb-4">
+                  <label htmlFor="timeperiod" className="block text-sm font-medium">Time period</label>
+                  <select
+                    id="timeperiod"
+                    value={timeperiod}
+                    onChange={(e) => setTimeperiod(e.target.value)}
+                    className="mt-1 block w-full p-2 bg-gray-700 text-white rounded-md"
+                  >
+                    <option value="1week">1 Week</option>
+                    <option value="1month">1 Month</option>
+                    <option value="3month">3 Month</option>
+                    <option value="6month">6 Month</option>
                   </select>
                 </div>
                 <button

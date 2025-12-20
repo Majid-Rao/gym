@@ -14,6 +14,7 @@ import AiChatbot from './users/user/pages/AiChatbot.jsx';
 import UserActivities from './users/user/pages/UserActivities.jsx';
 import CheckActivities from './users/user/pages/CheckActivities.jsx';
 import EditActivities from './users/user/pages/EditActivities.jsx';
+import ViewSuggestion from './users/user/pages/ViewSuggestion.jsx';
 //////
 import Register from './auth/Register/Register';
 import Login from './auth/Login/Login';
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/addactivities" element={<UserActivities />} />
         <Route path="/viewactivities/:id" element={<CheckActivities />} />
         <Route path="/updateactivities/:id" element={<EditActivities />} />
+        <Route path="/viewsuggestions/:id" element={<ViewSuggestion />} />
 
 
 

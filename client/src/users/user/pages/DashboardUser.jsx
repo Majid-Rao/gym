@@ -19,34 +19,24 @@ const DashboardUser = () => {
     <Sidebar />
     <div className='flex-1 overflow-auto relative z-10'>
       
-      <Header title='User Dasboard' />
+      <Header title='User Dashboard' />
       
       <main className='max-w-7xl mx-auto py-6 px-4 lg:px-8'>
-        {/* STATS */}
-        
-        <motion.div
-          className='grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8'
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <StatCard name='Total Order' icon={Zap} value='10' color='#6366F1' />
-          <StatCard name='Orders' icon={Users} value='1' color='#8B5CF6' />
-          <StatCard name='Payment' icon={ShoppingBag} value='5' color='#EC4899' />
-          <StatCard name='Users' icon={BarChart2} value='4' color='#10B981' />
-        </motion.div>
+       <h1 className="text-center text-xl sm:text-3xl py-3">Welcome to User's Dashboard</h1>
+       <h4 className="text-center text-lg sm:text-2xl py-1">Instructions For User</h4>
+       
+       {/* Bullet List */}
+       <ul className="list-disc sm:pl-8 pl-4 text-md text-gray-300 py-3">
+         <li><strong>Suggestions:</strong> Follow the instructions carefully for a personalized experience, and feel free to ask if you need help at any step.</li>
+         <li className="py-1"><strong>Chatbot:</strong> Our AI-powered chatbot is here to assist you with any queries or tasks you need help with during your journey.</li>
+         <li className="py-1"><strong>User Activities:</strong> Keep track of your activities and progress directly from the dashboard to stay organized and on top of your goals.</li>
+       </ul>
 
-        {/* CHARTS */}
-
-        {/* <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-          <SalesOverviewChart />
-          <CategoryDistributionChart />
-          <SalesChannelChart />
-        </div> */}
       </main>
     </div>
     </div>
     </>
   );
 };
+
 export default DashboardUser;

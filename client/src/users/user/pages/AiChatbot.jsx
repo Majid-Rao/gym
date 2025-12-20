@@ -75,7 +75,7 @@ const AiChatbot = () => {
 
       // Temporarily add user message to UI
       const tempUserMessage = { 
-        sender: 'user',  // Changed from 'type' to 'sender'
+        sender: 'user',
         message: userMessage,
         _id: Date.now().toString()
       };
@@ -155,7 +155,6 @@ const AiChatbot = () => {
 
   // Determine if message is from user or AI
   const isUserMessage = (chat) => {
-    // Try different possible field names
     return chat.sender === 'user' || 
            chat.type === 'user' || 
            chat.role === 'user' ||
@@ -182,8 +181,15 @@ const AiChatbot = () => {
               
               {/* Chat Header */}
               <div className="bg-gray-700 px-6 py-4 border-b border-gray-600">
-                <h2 className="text-xl font-semibold text-white">AI Assistant</h2>
-                <p className="text-sm text-gray-400">Ask me anything you want to know</p>
+                <h2 className="text-xl font-semibold text-white">AI Fitness Assistant 💪</h2>
+                <p className="text-sm text-gray-400">Ask me about gym, fitness, workouts & diet plans only!</p>
+              </div>
+
+              {/* Info Banner - YE NEW HAI */}
+              <div className="bg-blue-600/20 border-l-4 border-blue-500 px-6 py-3">
+                <p className="text-sm text-blue-300">
+                  ℹ️ <span className="font-semibold">Note:</span> I can only help with gym, fitness, workouts, nutrition, and diet-related questions.
+                </p>
               </div>
 
               {/* Chat History */}
@@ -191,7 +197,7 @@ const AiChatbot = () => {
                 {chatHistory.length === 0 ? (
                   <div className="text-center text-gray-400 mt-20">
                     <p className="text-lg">No messages yet</p>
-                    <p className="text-sm mt-2">Send your first message!</p>
+                    <p className="text-sm mt-2">Ask me about workouts, diet plans, or fitness tips!</p>
                   </div>
                 ) : (
                   chatHistory.map((chat) => {
@@ -244,7 +250,7 @@ const AiChatbot = () => {
                     value={userMessage}
                     onChange={(e) => setUserMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder="Type your message here..."
+                    placeholder="Ask about workouts, diet, or fitness..."
                     className="flex-1 px-5 py-3 bg-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
                     disabled={loading}
                   />
